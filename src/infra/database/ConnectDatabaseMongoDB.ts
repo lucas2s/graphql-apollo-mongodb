@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../prisma/generated';
+import { PrismaClient } from '../../../prisma/generated';
 
 export class ConnectDatabaseMongoDB {
 	private static connection: PrismaClient;

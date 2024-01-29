@@ -1,7 +1,7 @@
-import { ConnectDatabaseMongoDB } from './database/ConnectDatabaseMongoDB';
-import { ApolloServerStarter } from './ApolloServerStarter';
-import { resolvers } from './graphql/resolvers';
-import { typeDefs } from './graphql/typeDefs';
+import { ConnectDatabaseMongoDB } from "./infra/database/ConnectDatabaseMongoDB";
+import { ApolloServerStarter } from "./infra/graphql/ApolloServerStarter";
+import { resolvers } from "./infra/graphql/resolvers";
+import { typeDefs } from "./infra/graphql/typeDefs";
 
 const connect_database_mongodb = new ConnectDatabaseMongoDB();
 const connection = connect_database_mongodb.getInstance();
