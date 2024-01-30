@@ -1,9 +1,8 @@
-import { gql } from 'apollo-server';
+import path from 'path';
+import { loadFilesSync } from '@graphql-tools/load-files';
+import { mergeTypeDefs } from '@graphql-tools/merge';
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+const typesArray = loadFilesSync(path.join(__dirname, './**/*.gql'));
+const typeDefs = mergeTypeDefs(typesArray);
 
 export { typeDefs };
