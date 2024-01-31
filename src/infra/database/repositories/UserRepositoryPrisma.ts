@@ -5,7 +5,7 @@ import { User } from "../../../domain/entities/User";
 export class UserRepositoryPrisma implements IUserRepository {
   
   constructor(private readonly connect: PrismaClient) {}
-  async deleteUser(id: string): Promise<boolean> {
+  async deleteUserById(id: string): Promise<boolean> {
     try {
       await this.connect.user.delete({
         where: {
@@ -38,6 +38,7 @@ export class UserRepositoryPrisma implements IUserRepository {
         userCreated.updated_at
       );
     } catch (error: any) {
+      console.log(error);
       throw new Error(error);
     }
   }
@@ -66,18 +67,18 @@ export class UserRepositoryPrisma implements IUserRepository {
     }
   }
 
-  async findUsers(user: User): Promise<User[]> {
+  async findUsers(user?: User): Promise<User[]> {
     const where = {};
-    if (user.first_name) {
+    if (user?.first_name) {
       Object.assign(where, { first_name: user.first_name });
     }
-    if (user.last_name) {
+    if (user?.last_name) {
       Object.assign(where, { last_name: user.last_name });
     }
-    if (user.email) {
+    if (user?.email) {
       Object.assign(where, { email: user.email });
     }
-    if (user.active) {
+    if (user?.active) {
       Object.assign(where, { active: user.active });
     }
     try {
