@@ -4,12 +4,17 @@ export class ConnectDatabaseMongoDB {
 	private static connection: PrismaClient;
 
 	constructor(url_connection?:string) {
-		let datasources = {};
-		if (url_connection) {
-			datasources = { db: { url: url_connection } };
+		try {
+			let datasources = {};
+			if (url_connection) {
+				datasources = { db: { url: url_connection } };
+			}
+			if (!ConnectDatabaseMongoDB.connection) {
+				ConnectDatabaseMongoDB.connection = new PrismaClient(datasources);
+			}
 		}
-		if (!ConnectDatabaseMongoDB.connection) {
-			ConnectDatabaseMongoDB.connection = new PrismaClient(datasources);
+		catch (error: any) {
+			throw new Error(error);
 		}
 	}
 
